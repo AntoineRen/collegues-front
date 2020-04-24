@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import Collegue from '../models/Collegue';
 
 @Component({
@@ -8,12 +8,23 @@ import Collegue from '../models/Collegue';
 })
 export class CollegueComponent implements OnInit {
 
-  @Input() col:Collegue;
+  @Input() col: Collegue;
+  public modif = false;
 
   constructor() { }
 
   modifier(){
-    console.log('Modification du collègue');
+    this.modif = true;
+  }
+
+  valider(newEmail, newPhoto){
+    this.modif = false;
+    this.col.email = newEmail;
+
+    if (newPhoto.length > 0){
+      this.col.photoUrl = newPhoto;
+    }
+
   }
 
   nouveauCollegue(){

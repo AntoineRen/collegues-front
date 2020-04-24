@@ -1,36 +1,91 @@
-<div class="container border">
+<div class="rounded bg-dark text-light p-2">
 
     <div class="row">
-        <div class="col-3">
-            <img src={{col.photoUrl}} class="img-thumbnail" style="width: 100px; height: 100px;" alt="photo de profil">
+        <div class="col-3 ml-2 mt-2">
+            <img src={{col.photoUrl}} class="img-thumbnail" style="width: 200px; height: 200px;" alt="photo de profil">
         </div>
 
-        <div class="col">
+        <div class="col m-auto">
             <div class="row">
-                Matricule : {{col.matricule}}
+
+                <div class="col">
+                    Matricule :
+                </div>
+                <div class="col">
+                    {{col.matricule}}
+                </div>
+
             </div>
             <div class="row">
-                Nom : {{col.nom}}
+
+                <div class="col">
+                    Nom :
+                </div>
+                <div class="col">
+                    {{col.nom}}
+                </div>
+
             </div>
             <div class="row">
-                Prénoms : {{col.prenoms}}
+
+                <div class="col">
+                    Prénoms :
+                </div>
+                <div class="col">
+                    {{col.prenoms}}
+                </div>
+
             </div>
             <div class="row">
-                Date de naissance : {{col.dateDeNaissance.toDateString()}}
+
+                <div class="col">
+                    Date de naissance :
+                </div>
+                <div class="col">
+                    {{col.dateDeNaissance.toDateString()}}
+                </div>
+
             </div>
-            <div class="row">
-                Email : {{col.email}}
-            </div>
+
+            <!--email-->
+
+                <div class="row mt-1" [hidden]="!modif">
+                        <label class="form-label col-6" for="id_email">Email :</label>
+                        <input #newEmail type="email" class="form-control col-5" id="id_email">
+                </div>
+
+                <div class="row" [hidden]="modif">
+                    <div class="col">
+                        Email :
+                    </div>
+                    <div class="col">
+                        {{col.email}}
+                    </div>
+                </div>
+
+                <div class="row mt-1" [hidden]="!modif">
+                    <label for="id_photoUrl" class="form-label col-6">Photo Url :</label>
+                    <input #newPhoto type="text" id="id_email" class="form-control col-5">
+                </div>
+
         </div>
     </div>
 
-    <div class="row">
+
+    <div class="row mt-2">
 
         <div class=" offset-4 col-4">
-            <a (click)="nouveauCollegue()" href="#">Créer un nouveau collègue</a>
+            <button (click)="nouveauCollegue()" class="btn btn-link">Créer un nouveau collègue</button>
         </div>
+
         <div class="col-4">
-            <button class="btn btn-primary" (click)="modifier()">Modifier</button>
+            <ng-container *ngIf="modif; else elseBlock">
+                <button class="btn btn-outline-light" (click)="valider(newEmail.value,newPhoto.value)">Valider</button>
+            </ng-container>
+            <ng-template #elseBlock>
+                <button class="btn btn-outline-light" (click)="modifier()">Modifier</button>
+            </ng-template>
+
         </div>
 
     </div>
