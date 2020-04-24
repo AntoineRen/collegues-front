@@ -13,21 +13,21 @@ export class CollegueComponent implements OnInit {
 
   constructor() { }
 
-  modifier(){
+  modifier() {
     this.modif = true;
   }
 
-  valider(newEmail, newPhoto){
+  valider(newEmail, newPhoto) {
     this.modif = false;
     this.col.email = newEmail;
 
-    if (newPhoto.length > 0){
+    if (newPhoto.length > 0) {
       this.col.photoUrl = newPhoto;
     }
 
   }
 
-  nouveauCollegue(){
+  nouveauCollegue() {
     console.log('Création d’un nouveau collègue');
   }
 

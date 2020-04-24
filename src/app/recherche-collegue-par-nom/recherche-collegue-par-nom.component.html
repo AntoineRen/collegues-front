@@ -1,0 +1,14 @@
+<form class="form-inline mt-2">
+
+  <label for="id_recherche" class="col-3">Recherche par nom</label>
+  <input type="text" class="form-control col-5" id="id_recherche">
+
+  <button type="button" class="btn btn-outline-light col-3 mx-auto" (click)="afficherListe()">Rechercher</button>
+</form>
+
+<div *ngIf="affListe" class="row my-3 justify-content-center">
+  <ul class="list-group">
+    <li *ngFor="let matricule of listeMatricule" class="list-group-item list-group-item-dark">Matricule n° {{matricule}}
+    </li>
+  </ul>
+</div>
