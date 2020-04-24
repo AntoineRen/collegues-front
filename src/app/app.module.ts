@@ -3,14 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AlertComponent } from './alert/alert.component';
-import {NgbdAlertBasic} from './alert-basic.component'
+import { CollegueComponent } from './collegue/collegue.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent,
-    NgbdAlertBasic
+    CollegueComponent,
   ],
   imports: [
     BrowserModule,

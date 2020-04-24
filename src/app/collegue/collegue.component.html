@@ -1,0 +1,38 @@
+<div class="container border">
+
+    <div class="row">
+        <div class="col-3">
+            <img src={{col.photoUrl}} class="img-thumbnail" style="width: 100px; height: 100px;">
+        </div>
+
+        <div class="col">
+            <div class="row">
+                Matricule : {{col.matricule}}
+            </div>
+            <div class="row">
+                Nom : {{col.nom}}
+            </div>
+            <div class="row">
+                Prénoms : {{col.prenoms}}
+            </div>
+            <div class="row">
+                Date de naissance : {{col.dateDeNaissance.toDateString()}}
+            </div>
+            <div class="row">
+                Email : {{col.email}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class=" offset-4 col-4">
+            <a href="">Créer un nouveau collègue</a>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary">Modifier</button>
+        </div>
+
+    </div>
+
+</div>
