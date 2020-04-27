@@ -9,11 +9,18 @@ import { DataService } from '../services/data.service';
 export class RechercheCollegueParNomComponent implements OnInit {
 
   public affListe = false;
-  public listeMatricule = this.dataService.rechercherParNom('temp');
+  public listeMatricule: string[];
 
   constructor(private dataService: DataService) { }
 
-  afficherListe() {
+  afficherListe(nomRecherche: string) {
+
+    this.dataService.rechercherParNom(nomRecherche).subscribe(data => {
+      this.listeMatricule = data;
+    }, error => {
+      console.log(`erreur : ${error}`);
+    });
+
     this.affListe = true;
   }
 

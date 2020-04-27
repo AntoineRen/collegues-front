@@ -1,9 +1,9 @@
 <form class="form-inline mt-2">
 
   <label for="id_recherche" class="col-3">Recherche par nom</label>
-  <input type="text" class="form-control col-5" id="id_recherche">
+  <input type="text" class="form-control col-5" id="id_recherche" #recherche>
 
-  <button type="button" class="btn btn-outline-light col-3 mx-auto" (click)="afficherListe()">Rechercher</button>
+  <button type="button" class="btn btn-outline-light col-3 mx-auto" (click)="afficherListe(recherche.value)">Rechercher</button>
 </form>
 
 <div *ngIf="affListe" class="row my-3 justify-content-center">
