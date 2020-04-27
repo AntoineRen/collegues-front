@@ -29,7 +29,7 @@ export class DataService {
   }
 
   /** Rend le collegue mock par défaut au début de l'application */
-  recupererCollegueCourant(): Collegue{
+  recupererCollegueDefaut(): Collegue{
     return collegueMock;
   }
 

@@ -10,18 +10,11 @@ import { Subscription } from 'rxjs';
 })
 export class CollegueComponent implements OnInit, OnDestroy {
 
-  col: Collegue = this.dataService.recupererCollegueCourant();
+  col: Collegue = this.dataService.recupererCollegueDefaut();
   public modif = false;
   collegueSub: Subscription;
 
-  constructor(private dataService: DataService) {
-
-    this.collegueSub = this.dataService.colCourant.subscribe( collegue => {
-      this.col = collegue;
-    }, error => {
-      console.log(`Erreur : ${error.message}`);
-    });
-  }
+  constructor(private dataService: DataService) { }
 
   modifier() {
     this.modif = true;
@@ -42,6 +35,11 @@ export class CollegueComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.collegueSub = this.dataService.colCourant.subscribe( collegue => {
+      this.col = collegue;
+    }, error => {
+      console.log(`Erreur : ${error.message}`);
+    });
   }
 
   ngOnDestroy() {
