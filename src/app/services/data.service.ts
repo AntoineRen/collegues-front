@@ -4,7 +4,7 @@ import Collegue from '../models/Collegue';
 import { collegueMock } from '../mock/collegues.mock';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -13,14 +13,50 @@ const URL_BACKEND = environment.backendUrl;
 })
 export class DataService {
 
+  /** Subject de collegues */
+  private collegueCourant = new Subject<Collegue>();
+  /** Cache de collegues */
+  private cacheCollegue = new Map();
+
   constructor(private http: HttpClient) { }
 
+  /** Effectue une requête pour obtenir la liste des matricules en fonction d'un nom */
   rechercherParNom(nom: string): Observable<string[]> {
+
+    this.cacheCollegue = new Map(); // clear cache
 
     return this.http.get<string[]>(URL_BACKEND + '?nom=' + nom);
   }
 
+  /** Rend le collegue mock par défaut au début de l'application */
   recupererCollegueCourant(): Collegue{
     return collegueMock;
+  }
+
+  /** push un collegue dans le subject */
+  requestGetCollegue(matricule: string){
+
+    if (this.cacheCollegue.has(matricule)){ // si collegue déja présent en cache
+
+      this.collegueCourant.next(this.cacheCollegue.get(matricule));
+
+    }else{
+
+      this.http.get<Collegue>(URL_BACKEND + matricule).subscribe( collegue => {
+
+        this.cacheCollegue.set(collegue.matricule, collegue); // add to cache
+        this.collegueCourant.next(collegue);
+
+      }, error => {
+        console.log(`Erreur ${error.message}`);
+      }
+      );
+    }
+
+  }
+
+  /** Getter qui retourne le subject sous forme d'observable */
+  get colCourant() {
+    return this.collegueCourant.asObservable();
   }
 }

@@ -8,7 +8,7 @@
 
 <div *ngIf="affListe" class="row my-3 justify-content-center">
   <ul class="list-group">
-    <li *ngFor="let matricule of listeMatricule" class="list-group-item list-group-item-dark">Matricule n° {{matricule}}
+    <li *ngFor="let matricule of listeMatricule" class="list-group-item list-group-item-dark btn" (click)="afficherCollegue(matricule)">Matricule n° {{matricule}}
     </li>
   </ul>
 </div>

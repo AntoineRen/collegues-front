@@ -1,18 +1,27 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import Collegue from '../models/Collegue';
 import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-collegue',
   templateUrl: './collegue.component.html',
   styleUrls: ['./collegue.component.css']
 })
-export class CollegueComponent implements OnInit {
+export class CollegueComponent implements OnInit, OnDestroy {
 
   col: Collegue = this.dataService.recupererCollegueCourant();
   public modif = false;
+  collegueSub: Subscription;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+
+    this.collegueSub = this.dataService.colCourant.subscribe( collegue => {
+      this.col = collegue;
+    }, error => {
+      console.log(`Erreur : ${error.message}`);
+    });
+  }
 
   modifier() {
     this.modif = true;
@@ -35,4 +44,7 @@ export class CollegueComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+    this.collegueSub.unsubscribe();
+  }
 }

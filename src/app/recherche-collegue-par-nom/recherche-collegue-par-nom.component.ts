@@ -24,6 +24,10 @@ export class RechercheCollegueParNomComponent implements OnInit {
     this.affListe = true;
   }
 
+  afficherCollegue(matricule: string){
+    this.dataService.requestGetCollegue(matricule);
+  }
+
   ngOnInit(): void {
   }
 
