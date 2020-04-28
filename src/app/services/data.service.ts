@@ -5,6 +5,7 @@ import { collegueMock } from '../mock/collegues.mock';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
+import CollegueSaisie from '../models/CollegueSaisie';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -53,6 +54,14 @@ export class DataService {
       );
     }
 
+  }
+
+  creerCollegue(collegueSaisie: CollegueSaisie){
+    return this.http.post<Collegue>(URL_BACKEND, collegueSaisie).subscribe( collegue => {
+      this.collegueCourant.next(collegue);
+    }), error => {
+      console.log(`Erreur ${error.message}`);
+    };
   }
 
   /** Getter qui retourne le subject sous forme d'observable */
