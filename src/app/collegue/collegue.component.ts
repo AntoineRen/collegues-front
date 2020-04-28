@@ -10,16 +10,21 @@ import { Subscription } from 'rxjs';
 })
 export class CollegueComponent implements OnInit, OnDestroy {
 
+  /** Objet Collegue transmettant les infos au html */
   col: Collegue = this.dataService.recupererCollegueDefaut();
+  /** boolean indique si on est entrain de modifier les infos d'un collègue */
   public modif = false;
+  /**  Abonnement a un subject qui renvoie des collègues */
   collegueSub: Subscription;
 
   constructor(private dataService: DataService) { }
 
+  /** passage en mode modification */
   modifier() {
     this.modif = true;
   }
 
+  /** validation des modifications */
   valider(newEmail, newPhoto) {
     this.modif = false;
     this.col.email = newEmail;
@@ -34,6 +39,7 @@ export class CollegueComponent implements OnInit, OnDestroy {
     console.log('Création d’un nouveau collègue');
   }
 
+  /** abonnement au subject lors de l'initialisation du composant */
   ngOnInit(): void {
     this.collegueSub = this.dataService.colCourant.subscribe( collegue => {
       this.col = collegue;
@@ -42,6 +48,7 @@ export class CollegueComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** désabonnement du subject */
   ngOnDestroy() {
     this.collegueSub.unsubscribe();
   }
