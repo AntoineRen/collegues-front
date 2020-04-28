@@ -8,8 +8,12 @@
 
     <app-recherche-collegue-par-nom class="col-12 col-lg-6"></app-recherche-collegue-par-nom>
 
-    <app-collegue class="col-12 col-lg-6"></app-collegue>
-    <app-creer-collegue></app-creer-collegue>
+    <ng-container *ngIf="modeCreation; else elseBlock">
+      <app-creer-collegue></app-creer-collegue>
+    </ng-container>
+    <ng-template #elseBlock>
+      <app-collegue class="col-12 col-lg-6"></app-collegue>
+    </ng-template>
 
   </div>
 

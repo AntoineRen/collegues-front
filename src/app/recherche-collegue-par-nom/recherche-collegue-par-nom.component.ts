@@ -33,6 +33,7 @@ export class RechercheCollegueParNomComponent implements OnInit, OnDestroy {
   /** Appel le dataService pour lancer une recherche d'un collègue en fonction d'un matricule */
   afficherCollegue(matricule: string){
     this.dataService.requestGetCollegue(matricule);
+    this.dataService.desactiverModeCreation();
   }
 
   ngOnInit(): void {

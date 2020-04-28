@@ -4,7 +4,7 @@ import Collegue from '../models/Collegue';
 import { collegueMock } from '../mock/collegues.mock';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import CollegueSaisie from '../models/CollegueSaisie';
 
 const URL_BACKEND = environment.backendUrl;
@@ -15,7 +15,9 @@ const URL_BACKEND = environment.backendUrl;
 export class DataService {
 
   /** Subject de collegues */
-  private collegueCourant = new Subject<Collegue>();
+  private collegueCourant = new BehaviorSubject<Collegue>(collegueMock);
+  /** Subject pour mode creation */
+  private modeCreation = new Subject<boolean>();
   /** Cache de collegues */
   private cacheCollegue = new Map();
 
@@ -59,13 +61,27 @@ export class DataService {
   creerCollegue(collegueSaisie: CollegueSaisie){
     return this.http.post<Collegue>(URL_BACKEND, collegueSaisie).subscribe( collegue => {
       this.collegueCourant.next(collegue);
+      this.desactiverModeCreation();
     }), error => {
       console.log(`Erreur ${error.message}`);
     };
   }
 
-  /** Getter qui retourne le subject sous forme d'observable */
+  activerModeCreation(){
+    this.modeCreation.next(true);
+  }
+
+  desactiverModeCreation(){
+    this.modeCreation.next(false);
+  }
+
+  /** Getter qui retourne le subject collegueCourant sous forme d'observable */
   get colCourant() {
     return this.collegueCourant.asObservable();
+  }
+
+  /** Getter qui retourne le subject modeCreation sous forme d'observable */
+  get modeCrea() {
+    return this.modeCreation.asObservable();
   }
 }

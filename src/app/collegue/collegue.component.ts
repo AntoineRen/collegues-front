@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class CollegueComponent implements OnInit, OnDestroy {
 
   /** Objet Collegue transmettant les infos au html */
-  col: Collegue = this.dataService.recupererCollegueDefaut();
+  col: Collegue;
   /** boolean indique si on est entrain de modifier les infos d'un collègue */
   public modif = false;
   /**  Abonnement a un subject qui renvoie des collègues */
@@ -36,7 +36,7 @@ export class CollegueComponent implements OnInit, OnDestroy {
   }
 
   nouveauCollegue() {
-    console.log('Création d’un nouveau collègue');
+    this.dataService.activerModeCreation();
   }
 
   /** abonnement au subject lors de l'initialisation du composant */
