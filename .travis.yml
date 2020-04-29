@@ -5,7 +5,7 @@ before_script:
   - npm install
 script:
   - npm run build
-  - cp index.html 404.html
+  - cd dist/collegues-front && cp index.html 404.html
 deploy:
   local-dir: dist/collegues-front
   provider: pages
