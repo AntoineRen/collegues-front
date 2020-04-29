@@ -3,7 +3,8 @@ node_js:
   - "12"
 before_script:
   - npm install
-script: npm run build
+script:
+  - npm run build
   - cp index.html 404.html
 deploy:
   local-dir: dist/collegues-front
