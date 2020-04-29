@@ -20,7 +20,8 @@ export class CreerCollegueComponent implements OnInit {
     this.submit = true;
 
     if (this.collegueSaisie.nom && this.collegueSaisie.prenoms && this.collegueSaisie.dateDeNaissance
-      && this.collegueSaisie.photoUrl && this.collegueSaisie.email.length >= 7){
+      && this.collegueSaisie.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]')
+       && this.collegueSaisie.photoUrl && this.collegueSaisie.photoUrl.length >= 7){
 
         this.dataService.creerCollegue(this.collegueSaisie).subscribe( () => {}, error => this.error = true);
       }
