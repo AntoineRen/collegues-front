@@ -1,21 +1,9 @@
 <header>
-
+<app-menu></app-menu>
 </header>
 <main class="container-fluid bg-dark text-light">
-  <div class="row">
 
-    <h1 class="col-12 display-5 text-center mb-4 pb-3 pt-2 border rounded">Administration Collegue</h1>
-
-    <app-recherche-collegue-par-nom class="col-12 col-lg-6"></app-recherche-collegue-par-nom>
-
-    <ng-container *ngIf="modeCreation; else elseBlock">
-      <app-creer-collegue class="col-12 col-lg-6"></app-creer-collegue>
-    </ng-container>
-    <ng-template #elseBlock>
-      <app-collegue class="col-12 col-lg-6"></app-collegue>
-    </ng-template>
-
-  </div>
+  <router-outlet></router-outlet>
 
 </main>
 <footer>

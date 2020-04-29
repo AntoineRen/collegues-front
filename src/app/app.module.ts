@@ -8,6 +8,12 @@ import { RechercheCollegueParNomComponent } from './recherche-collegue-par-nom/r
 import { HttpClientModule } from '@angular/common/http';
 import { CreerCollegueComponent } from './creer-collegue/creer-collegue.component';
 import { FormsModule } from '@angular/forms';
+import { AccueilComponent } from './accueil/accueil.component';
+import { RouterModule } from '@angular/router';
+import { MenuComponent } from './menu/menu.component';
+import { GallerieComponent } from './gallerie/gallerie.component';
+import { AproposComponent } from './apropos/apropos.component';
+import { ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -15,12 +21,17 @@ import { FormsModule } from '@angular/forms';
     CollegueComponent,
     RechercheCollegueParNomComponent,
     CreerCollegueComponent,
+    AccueilComponent,
+    MenuComponent,
+    GallerieComponent,
+    AproposComponent,
   ],
   imports: [
+    RouterModule.forRoot(ROUTES),
     BrowserModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
