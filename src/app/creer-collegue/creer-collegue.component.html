@@ -1,8 +1,16 @@
 <form class="form-group" #formCrea="ngForm">
+
+  <div class="row">
+    <div class="col-12 text-center mb-2">
+      <h2>Creation collègue</h2>
+    </div>
+  </div>
+
   <div class="row">
 
-    <div class="col-12 col-sm-3 m-auto d-flex justify-content-center">
-      <img *ngIf="previPhoto; else elseBlock" src={{collegueSaisie.photoUrl}} class="img-fluid img-thumbnail" alt="photo de profil">
+    <div class="col-12 col-sm-3 d-flex justify-content-center my-auto">
+      <img *ngIf="previPhoto; else elseBlock" src={{collegueSaisie.photoUrl}} class="img-fluid img-thumbnail"
+        alt="photo de profil">
       <ng-template #elseBlock>
         <button class="btn btn-outline-light" (click)="previsualiserPhoto()">Previsualiser photo</button>
       </ng-template>
@@ -14,15 +22,16 @@
 
       <div class="row">
 
-        <div class="col">
+        <div class="col-sm-3">
           <label for="id_nom">Nom :</label>
         </div>
-        <div class="col">
-          <input type="text" id="id_nom" name="nom" class="form-control" [(ngModel)]="collegueSaisie.nom" required #nom="ngModel">
+        <div class="col-sm-9">
+          <input type="text" id="id_nom" name="nom" class="form-control" [(ngModel)]="collegueSaisie.nom" required
+            #nom="ngModel">
         </div>
 
-        <div class="col-12">
-          <div *ngIf="( submit || nom.dirty) && nom.invalid" class="alert alert-warning" role="alert">
+        <div *ngIf="( submit || nom.dirty) && nom.invalid" class="offset-sm-3 col-sm-9 mt-2">
+          <div class="alert alert-warning p-2" role="alert">
             Veuillez renseigner un nom.
           </div>
         </div>
@@ -33,14 +42,16 @@
 
       <div class="row">
 
-        <div class="col">
+        <div class="col-sm-3">
           <label for="id_prenom">Prénom :</label>
         </div>
-        <div class="col">
-          <input type="text" id="id_prenom" name="prenoms" class="form-control" [(ngModel)]="collegueSaisie.prenoms" required #prenom="ngModel">
+        <div class="col-sm-9">
+          <input type="text" id="id_prenom" name="prenom" class="form-control" [(ngModel)]="collegueSaisie.prenoms" required
+            #prenom="ngModel">
         </div>
-        <div class="col-12">
-          <div *ngIf="( submit || prenom.dirty) && prenom.invalid" class="alert alert-warning" role="alert">
+
+        <div *ngIf="( submit || prenom.dirty) && prenom.invalid" class="offset-sm-3 col-sm-9 mt-2">
+          <div class="alert alert-warning p-2" role="alert">
             Veuillez renseigner un prénom.
           </div>
         </div>
@@ -50,15 +61,17 @@
 
       <div class="row">
 
-        <div class="col">
+        <div class="col-sm-3">
           <label for="id_date">Date de naissance :</label>
         </div>
-        <div class="col">
-          <input type="date" id="id_date" class="form-control" name="dateDeNaissance" [(ngModel)]="collegueSaisie.dateDeNaissance" required #date="ngModel">
+        <div class="col-sm-9">
+          <input type="date" id="id_date" name="date" class="form-control" [(ngModel)]="collegueSaisie.dateDeNaissance" required
+            #date="ngModel">
         </div>
-        <div class="col-12">
-          <div *ngIf="( submit || date.dirty) && date.invalid" class="alert alert-warning" role="alert">
-            Veuillez renseigner une date de naissance.
+
+        <div *ngIf="( submit || date.dirty) && date.invalid" class="offset-sm-3 col-sm-9 mt-2">
+          <div class="alert alert-warning p-2" role="alert">
+            Veuillez renseigner une date de Naissance.
           </div>
         </div>
       </div>
@@ -67,15 +80,17 @@
 
       <div class="row">
 
-        <div class="col">
+        <div class="col-sm-3">
           <label for="id_email">Email :</label>
         </div>
-        <div class="col">
-          <input type="email" id="id_email" class="form-control" name="email" [(ngModel)]="collegueSaisie.email" required #email="ngModel">
+        <div class="col-sm-9">
+          <input type="email" id="id_email" name="email" class="form-control" [(ngModel)]="collegueSaisie.email" required
+            #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]">
         </div>
-        <div class="col-12">
-          <div *ngIf="( submit || email.dirty) && email.invalid" class="alert alert-warning" role="alert">
-            Veuillez renseigner un email.
+
+        <div *ngIf="( submit ) && email.invalid" class="offset-sm-3 col-sm-9 mt-2">
+          <div class="alert alert-warning p-2" role="alert">
+            Veuillez renseigner un email valide.
           </div>
         </div>
       </div>
@@ -84,22 +99,18 @@
 
       <div class="row">
 
-        <div class="col">
-          <label for="id_photoUrl">Photo URL :</label>
+        <div class="col-sm-3">
+          <label for="id_photo">Photo Url :</label>
         </div>
-        <div class="col">
-          <input type="text" id="id_photoUrl" class="form-control" name="photoUrl" [(ngModel)]="collegueSaisie.photoUrl" required minlength="7" #photo="ngModel">
+        <div class="col-sm-9">
+          <input type="text" id="id_photo" name="photo" class="form-control" [(ngModel)]="collegueSaisie.photoUrl" required
+            #photo="ngModel" minlength="7">
         </div>
-        <div class="col-12">
-          <div *ngIf="( submit || photo.dirty) && photo.invalid" class="alert alert-warning" role="alert">
-            Veuillez indiquer l'url (minimum 7 caractères) d'une photo de profil.
-          </div>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="offset-9 col-3">
-          <button class="btn btn-outline-light" (click)="creerCollegue()">Créer</button>
+        <div *ngIf="( submit ) && photo.invalid" class="offset-sm-3 col-sm-9 mt-2">
+          <div class="alert alert-warning p-2" role="alert">
+            Veuillez renseigner un url valide (minimum 7 caractères) pour la photo de profil.
+          </div>
         </div>
       </div>
 
@@ -109,6 +120,12 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mt-2">
+      <button class="btn btn-outline-light float-right" (click)="creerCollegue()">Créer</button>
     </div>
   </div>
 

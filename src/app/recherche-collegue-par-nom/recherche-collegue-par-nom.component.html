@@ -1,5 +1,9 @@
 <form class="row form-group">
 
+    <div class="col-12 text-center mb-2">
+      <h2>Recherche</h2>
+    </div>
+
   <div class="col-12 col-sm-3">
     <label for="id_recherche" class="float-sm-right">Recherche par nom</label>
   </div>
@@ -9,14 +13,16 @@
   </div>
 
   <div class="col-12 col-sm-3 mt-2 mt-sm-0">
-    <button type="button" class="btn btn-outline-light col-12" (click)="afficherListe(recherche.value)">Rechercher</button>
+    <button type="button" class="btn btn-outline-light col-12"
+      (click)="afficherListe(recherche.value)">Rechercher</button>
   </div>
 
 </form>
 
 <div *ngIf="affListe" class="row my-3 justify-content-center">
   <ul class="list-group">
-    <li *ngFor="let matricule of listeMatricule" class="btn list-group-item list-group-item-dark" (click)="afficherCollegue(matricule)">
+    <li *ngFor="let matricule of listeMatricule" class="btn list-group-item list-group-item-dark"
+      (click)="afficherCollegue(matricule)">
       Matricule n° {{matricule}}
     </li>
   </ul>
