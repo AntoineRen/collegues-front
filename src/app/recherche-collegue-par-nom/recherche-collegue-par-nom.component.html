@@ -21,3 +21,9 @@
     </li>
   </ul>
 </div>
+<div *ngIf="aucunCollegue" class="alert alert-dark" role="alert">
+  Aucun collègue n'a été trouvé avec ce nom.
+</div>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  Echec de la recherche.
+</div>

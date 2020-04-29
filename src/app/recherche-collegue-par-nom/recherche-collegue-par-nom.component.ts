@@ -15,6 +15,10 @@ export class RechercheCollegueParNomComponent implements OnInit, OnDestroy {
   public listeMatricule: string[];
   /** Abonnement à un observable */
   public subToRechercheParNom: Subscription;
+  /** Indique si aucun collègue n'a été trouvé */
+  public aucunCollegue = false;
+  /** Si il y a eu une erreur dans la requete */
+  public error = false;
 
   constructor(private dataService: DataService) { }
 
@@ -23,11 +27,19 @@ export class RechercheCollegueParNomComponent implements OnInit, OnDestroy {
 
     this.subToRechercheParNom = this.dataService.rechercherParNom(nomRecherche).subscribe(data => {
       this.listeMatricule = data;
+      this.error = false;
+
+      if (data.length > 0){
+        this.aucunCollegue = false;
+        this.affListe = true;
+      }else{
+        this.aucunCollegue = true;
+      }
+
     }, error => {
-      console.log(`erreur : ${error}`);
+      this.error = true;
     });
 
-    this.affListe = true;
   }
 
   /** Appel le dataService pour lancer une recherche d'un collègue en fonction d'un matricule */
