@@ -14,7 +14,7 @@
     <div class="col m-auto">
       <div class="row">
 
-        <div class="col">
+        <div class="col-12">
           Matricule :
         </div>
         <div class="col">
@@ -56,15 +56,22 @@
       <!--email-->
 
       <div class="row mt-1" *ngIf="modif; else emailBlock">
-        <label class="form-label col-6" for="id_email">Email :</label>
-        <input type="email" class="form-control col-5" id="id_email" value={{col.email}} [(ngModel)]="collegueModif.email"
-        required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]" #email="ngModel">
-
-        <div *ngIf="( submit ) && email.invalid" class="offset-6 col-5">
-          <div class="alert alert-warning p-1 mt-1" role="alert">
-            Veuillez renseigner un email valide.
-          </div>
+        <div class="col-6">
+          <label class="form-label" for="id_email">Email :</label>
         </div>
+        <div class="col-5">
+          <input type="email" class="form-control" id="id_email" value={{col.email}} [(ngModel)]="collegueModif.email"
+            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]" #email="ngModel">
+        </div>
+
+        <ng-container *ngIf="( submit ) && email.invalid">
+          <div class="col-12 offset-sm-6 col-sm-5">
+            <div class="alert alert-warning p-1 mt-1" role="alert">
+              Veuillez renseigner un email valide.
+            </div>
+          </div>
+        </ng-container>
+
 
       </div>
 
@@ -82,15 +89,22 @@
       <!-- photoUrl-->
 
       <div class="row" *ngIf="modif">
-        <label for="id_photoUrl" class="form-label col-6">Photo Url :</label>
-        <input type="text" id="id_email" class="form-control col-5 mt-1" value={{col.photoUrl}} [(ngModel)]="collegueModif.photoUrl"
-        required minlength="7" #photo="ngModel">
-
-        <div *ngIf="( submit ) && photo.invalid" class="offset-6 col-5">
-          <div class="alert alert-warning p-1 mt-1" role="alert">
-            Veuillez renseigné un url valide (minimum 7 caractères).
-          </div>
+        <div class="col-6">
+          <label for="id_photoUrl" class="form-label">Photo Url :</label>
         </div>
+        <div class="col-5">
+          <input type="text" id="id_email" class="form-control" value={{col.photoUrl}}
+            [(ngModel)]="collegueModif.photoUrl" required minlength="7" #photo="ngModel">
+        </div>
+
+
+        <ng-container *ngIf="( submit ) && photo.invalid">
+          <div class="col-12 offset-sm-6 col-sm-5">
+              <div class="alert alert-warning p-1 mt-1" role="alert">
+                Veuillez renseigner un url valide (minimum 7 caractères).
+              </div>
+          </div>
+        </ng-container>
 
       </div>
 
