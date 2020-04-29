@@ -16,6 +16,8 @@ export class CollegueComponent implements OnInit, OnDestroy {
   public modif = false;
   /**  Abonnement a un subject qui renvoie des collègues */
   collegueSub: Subscription;
+  /** Si aucun collègue n'a pu être récupérer */
+  public error = false;
 
   constructor(private dataService: DataService) { }
 
@@ -25,13 +27,8 @@ export class CollegueComponent implements OnInit, OnDestroy {
   }
 
   /** validation des modifications */
-  valider(newEmail, newPhoto) {
+  valider() {
     this.modif = false;
-    this.col.email = newEmail;
-
-    if (newPhoto.length > 0) {
-      this.col.photoUrl = newPhoto;
-    }
 
   }
 
@@ -44,7 +41,7 @@ export class CollegueComponent implements OnInit, OnDestroy {
     this.collegueSub = this.dataService.colCourant.subscribe( collegue => {
       this.col = collegue;
     }, error => {
-      console.log(`Erreur : ${error.message}`);
+      this.error = true;
     });
   }
 

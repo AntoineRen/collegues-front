@@ -1,6 +1,12 @@
 <div class="rounded p-2">
 
-  <div class="row">
+  <ng-template class="row" #alertError>
+    <div class="alert alert-danger" role="alert">
+      Aucun collègue trouvé.
+    </div>
+  </ng-template>
+
+  <div *ngIf="!error; else alertError" class="row">
     <div class="col-12 col-sm-3 m-auto d-flex justify-content-center">
       <img src={{col.photoUrl}} class="img-fluid img-thumbnail" alt="photo de profil">
     </div>
@@ -49,25 +55,27 @@
 
       <!--email-->
 
-      <div class="row mt-1" [hidden]="!modif">
+      <div class="row mt-1" *ngIf="modif; else emailBlock">
         <label class="form-label col-6" for="id_email">Email :</label>
-        <input #newEmail type="email" class="form-control col-5" id="id_email" value={{col.email}}>
+        <input type="email" class="form-control col-5" id="id_email" value={{col.email}}>
       </div>
 
-      <div class="row" [hidden]="modif">
-        <div class="col">
-          Email :
+      <ng-template #emailBlock>
+        <div class="row">
+          <div class="col">
+            Email :
+          </div>
+          <div class="col">
+            {{col.email}}
+          </div>
         </div>
-        <div class="col">
-          {{col.email}}
-        </div>
-      </div>
+      </ng-template>
 
       <!-- photoUrl-->
 
-      <div class="row mt-1" [hidden]="!modif">
+      <div class="row mt-1" *ngIf="modif">
         <label for="id_photoUrl" class="form-label col-6">Photo Url :</label>
-        <input #newPhoto type="text" id="id_email" class="form-control col-5" value={{col.photoUrl}}>
+        <input type="text" id="id_email" class="form-control col-5" value={{col.photoUrl}}>
       </div>
 
     </div>
@@ -82,7 +90,7 @@
 
     <div class="col-12 col-sm-6 order-1 order-sm-2 d-flex justify-content-end">
       <ng-container *ngIf="modif; else elseBlock">
-        <button class="btn btn-outline-light" (click)="valider(newEmail.value,newPhoto.value)">Valider</button>
+        <button class="btn btn-outline-light" (click)="valider()">Valider</button>
       </ng-container>
       <ng-template #elseBlock>
         <button class="btn btn-outline-light" (click)="modifier()">Modifier</button>
