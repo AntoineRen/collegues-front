@@ -4,8 +4,8 @@ import { GallerieComponent } from './gallerie/gallerie.component';
 import { AproposComponent } from './apropos/apropos.component';
 
 export const ROUTES: Routes = [
+  { path: '', redirectTo: 'accueil', pathMatch: 'full'},
   { path: 'accueil', component: AccueilComponent},
   { path: 'gallerie', component: GallerieComponent},
-  { path: 'apropos', component: AproposComponent},
-  { path: '', pathMatch: 'full', redirectTo: 'accueil'}
+  { path: 'apropos', component: AproposComponent}
 ];
