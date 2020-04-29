@@ -2,7 +2,10 @@
   <div class="row">
 
     <div class="col-12 col-sm-3 m-auto d-flex justify-content-center">
-      <img src={{collegueSaisie.photoUrl}} class="img-fluid img-thumbnail" alt="photo de profil">
+      <img *ngIf="previPhoto; else elseBlock" src={{collegueSaisie.photoUrl}} class="img-fluid img-thumbnail" alt="photo de profil">
+      <ng-template #elseBlock>
+        <button class="btn btn-outline-light" (click)="previsualiserPhoto()">Previsualiser photo</button>
+      </ng-template>
     </div>
 
     <div class="col-12 col-sm-9 m-auto">

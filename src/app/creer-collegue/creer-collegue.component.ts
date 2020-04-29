@@ -12,6 +12,7 @@ export class CreerCollegueComponent implements OnInit {
   public collegueSaisie: CollegueSaisie = {};
   public submit = false;
   public error = false;
+  public previPhoto = false;
 
   constructor(private dataService: DataService) { }
 
@@ -23,6 +24,10 @@ export class CreerCollegueComponent implements OnInit {
 
         this.dataService.creerCollegue(this.collegueSaisie).subscribe( () => {}, error => this.error = true);
       }
+  }
+
+  previsualiserPhoto(){
+    this.previPhoto = true;
   }
 
   ngOnInit(): void {
