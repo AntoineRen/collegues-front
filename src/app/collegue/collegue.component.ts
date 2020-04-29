@@ -25,6 +25,8 @@ export class CollegueComponent implements OnInit, OnDestroy {
   public collegueModif: CollegueModif = {};
   /** sur validation d'une modification */
   public submit = false;
+  /** pattern email valid */
+  public emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
   constructor(private dataService: DataService) { }
 
@@ -38,7 +40,7 @@ export class CollegueComponent implements OnInit, OnDestroy {
 
     this.submit = true;
 
-    if (this.collegueModif.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]') && this.collegueModif.photoUrl.length >= 7){
+    if (this.collegueModif.email.match(this.emailPattern) && this.collegueModif.photoUrl.length >= 7){
 
       this.dataService.updateCollegue(this.collegueModif).subscribe(
         () => this.modif = false,

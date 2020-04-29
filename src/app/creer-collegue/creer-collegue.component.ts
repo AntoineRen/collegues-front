@@ -12,6 +12,8 @@ export class CreerCollegueComponent implements OnInit {
   public submit = false;
   public error = false;
   public previPhoto = false;
+  /** pattern email valid */
+  public emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
   constructor(private dataService: DataService) { }
 
@@ -19,7 +21,7 @@ export class CreerCollegueComponent implements OnInit {
     this.submit = true;
 
     if (this.collegueSaisie.nom && this.collegueSaisie.prenoms && this.collegueSaisie.dateDeNaissance
-      && this.collegueSaisie.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]')
+      && this.collegueSaisie.email.match(this.emailPattern)
        && this.collegueSaisie.photoUrl && this.collegueSaisie.photoUrl.length >= 7){
 
         this.dataService.creerCollegue(this.collegueSaisie).subscribe( () => {}, error => this.error = true);

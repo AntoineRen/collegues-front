@@ -85,7 +85,7 @@
         </div>
         <div class="col-sm-9">
           <input type="email" id="id_email" name="email" class="form-control" [(ngModel)]="collegueSaisie.email" required
-            #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]">
+            pattern=^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ #email="ngModel">
         </div>
 
         <div *ngIf="( submit ) && email.invalid" class="offset-sm-3 col-sm-9 mt-2">

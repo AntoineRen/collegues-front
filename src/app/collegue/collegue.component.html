@@ -14,7 +14,7 @@
     <div class="col m-auto">
       <div class="row">
 
-        <div class="col-12">
+        <div class="col">
           Matricule :
         </div>
         <div class="col">
@@ -61,7 +61,7 @@
         </div>
         <div class="col-5">
           <input type="email" class="form-control" id="id_email" value={{col.email}} [(ngModel)]="collegueModif.email"
-            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]" #email="ngModel">
+            required pattern=^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ #email="ngModel">
         </div>
 
         <ng-container *ngIf="( submit ) && email.invalid">
@@ -93,7 +93,7 @@
           <label for="id_photoUrl" class="form-label">Photo Url :</label>
         </div>
         <div class="col-5">
-          <input type="text" id="id_email" class="form-control" value={{col.photoUrl}}
+          <input type="text" id="id_photoUrl" class="form-control" value={{col.photoUrl}}
             [(ngModel)]="collegueModif.photoUrl" required minlength="7" #photo="ngModel">
         </div>
 
