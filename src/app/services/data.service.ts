@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import CollegueSaisie from '../models/CollegueSaisie';
+import { tap } from 'rxjs/operators';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -59,12 +60,12 @@ export class DataService {
   }
 
   creerCollegue(collegueSaisie: CollegueSaisie){
-    return this.http.post<Collegue>(URL_BACKEND, collegueSaisie).subscribe( collegue => {
-      this.collegueCourant.next(collegue);
-      this.desactiverModeCreation();
-    }), error => {
-      console.log(`Erreur ${error.message}`);
-    };
+    return this.http.post<Collegue>(URL_BACKEND, collegueSaisie).pipe(
+      tap(collegue => {
+        this.collegueCourant.next(collegue);
+        this.desactiverModeCreation();
+      })
+    );
   }
 
   activerModeCreation(){
