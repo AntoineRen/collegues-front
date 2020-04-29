@@ -57,7 +57,15 @@
 
       <div class="row mt-1" *ngIf="modif; else emailBlock">
         <label class="form-label col-6" for="id_email">Email :</label>
-        <input type="email" class="form-control col-5" id="id_email" value={{col.email}}>
+        <input type="email" class="form-control col-5" id="id_email" value={{col.email}} [(ngModel)]="collegueModif.email"
+        required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]" #email="ngModel">
+
+        <div *ngIf="( submit ) && email.invalid" class="offset-6 col-5">
+          <div class="alert alert-warning p-1 mt-1" role="alert">
+            Veuillez renseigner un email valide.
+          </div>
+        </div>
+
       </div>
 
       <ng-template #emailBlock>
@@ -73,9 +81,17 @@
 
       <!-- photoUrl-->
 
-      <div class="row mt-1" *ngIf="modif">
+      <div class="row" *ngIf="modif">
         <label for="id_photoUrl" class="form-label col-6">Photo Url :</label>
-        <input type="text" id="id_email" class="form-control col-5" value={{col.photoUrl}}>
+        <input type="text" id="id_email" class="form-control col-5 mt-1" value={{col.photoUrl}} [(ngModel)]="collegueModif.photoUrl"
+        required minlength="7" #photo="ngModel">
+
+        <div *ngIf="( submit ) && photo.invalid" class="offset-6 col-5">
+          <div class="alert alert-warning p-1 mt-1" role="alert">
+            Veuillez renseigné un url valide (minimum 7 caractères).
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -97,6 +113,13 @@
       </ng-template>
 
     </div>
+
+    <ng-container *ngIf="errorModif">
+      <div class="col-12">
+        <div class="alert alert-danger" role="alert">Erreur lors de la modification.</div>
+      </div>
+    </ng-container>
+
 
   </div>
 

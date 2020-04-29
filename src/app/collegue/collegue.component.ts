@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import Collegue from '../models/Collegue';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
+import CollegueModif from '../models/CollegueModif';
 
 @Component({
   selector: 'app-collegue',
@@ -18,6 +19,12 @@ export class CollegueComponent implements OnInit, OnDestroy {
   collegueSub: Subscription;
   /** Si aucun collègue n'a pu être récupérer */
   public error = false;
+  /** Si erreur modification */
+  public errorModif = false;
+  /** collegueModif contenant les valeurs à modifier */
+  public collegueModif: CollegueModif = {};
+  /** sur validation d'une modification */
+  public submit = false;
 
   constructor(private dataService: DataService) { }
 
@@ -28,8 +35,16 @@ export class CollegueComponent implements OnInit, OnDestroy {
 
   /** validation des modifications */
   valider() {
-    this.modif = false;
 
+    this.submit = true;
+
+    if (this.collegueModif.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]') && this.collegueModif.photoUrl.length >= 7){
+
+      this.dataService.updateCollegue(this.collegueModif).subscribe(
+        () => this.modif = false,
+        error => this.errorModif = true
+      );
+    }
   }
 
   nouveauCollegue() {
@@ -40,6 +55,10 @@ export class CollegueComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.collegueSub = this.dataService.colCourant.subscribe( collegue => {
       this.col = collegue;
+
+      this.collegueModif.matricule = this.col.matricule;
+      this.collegueModif.email = this.col.email;
+      this.collegueModif.photoUrl = this.col.photoUrl;
     }, error => {
       this.error = true;
     });
