@@ -8,6 +8,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import CollegueSaisie from '../models/CollegueSaisie';
 import CollegueModif from '../models/CollegueModif';
 import { tap } from 'rxjs/operators';
+import { MatPhoto } from '../models/MatPhoto';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -77,6 +78,11 @@ export class DataService {
         this.collegueCourant.next(collegue);
       })
     );
+  }
+
+  /** effectue une requete recuperant tous les matricules et photosUrl des collègues */
+  getAllMatPhoto() {
+    return this.http.get<MatPhoto[]>(URL_BACKEND + 'photos');
   }
 
   activerModeCreation(){
